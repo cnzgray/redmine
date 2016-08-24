@@ -64,7 +64,7 @@ case "$1" in
 			done
 		fi
 
-		if [ ! -s config/configuration.yml ]; then
+		if [ "$EMAIL_ADDRESS" ]; then
 			cat > './config/configuration.yml' <<-YML
 				$RAILS_ENV:
 				  email_delivery:
