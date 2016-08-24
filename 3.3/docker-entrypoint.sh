@@ -63,10 +63,16 @@ case "$1" in
 				echo "  $var: \"$val\"" >> config/database.yml
 			done
 		fi
+		
+		if [ ! -s config/configuration.yml ]; then
+      cat > './config/configuration.yml' <<-YML
+				$RAILS_ENV:
+          attachments_storage_path: $REDMINE_ATTACHMENTS_DIR
+			YML
+		fi
 
 		if [ "$EMAIL_ADDRESS" ]; then
-			cat > './config/configuration.yml' <<-YML
-				$RAILS_ENV:
+			cat >> './config/configuration.yml' <<-YML
 				  email_delivery:
 				  delivery_method: $EMAIL_METHOD
 				  smtp_settings:

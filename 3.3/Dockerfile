@@ -1,7 +1,7 @@
 FROM ruby:2.2-slim
 
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
-RUN groupadd -r redmine && useradd -r -g redmine redmine
+RUN groupadd -r redmine && useradd -r -g redmine -d /home/redmine redmine
 
 # grab gosu for easy step-down from root
 ENV GOSU_VERSION 1.7
@@ -41,7 +41,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 
 ENV RAILS_ENV production
-WORKDIR /usr/src/redmine
+ENV REDMINE_HOME="/home/redmine"
+ENV REDMINE_DATA_DIR="${REDMINE_HOME}/data"
+ENV REDMINE_ATTACHMENTS_DIR="${REDMINE_DATA_DIR}/files"
+WORKDIR ${REDMINE_HOME}/redmine
 
 ENV REDMINE_VERSION 3.3.0
 ENV REDMINE_DOWNLOAD_MD5 0c0abb2d4efde455c3505d8caf01cb2d
@@ -78,7 +81,7 @@ RUN buildDeps='\
 	&& apt-get purge -y --auto-remove $buildDeps
 
 
-VOLUME /usr/src/redmine/files
+VOLUME ["${REDMINE_DATA_DIR}"]
 
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
