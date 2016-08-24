@@ -74,14 +74,14 @@ YML
 		if [ "$EMAIL_ADDRESS" ]; then
 			cat >> 'config/configuration.yml' <<YML
   email_delivery:
-  delivery_method: :smtp
-  smtp_settings:
-    address: $EMAIL_ADDRESS
-    port: $EMAIL_PORT
-    authentication: $EMAIL_AUTHENTICATION
-    domain: $EMAIL_DOMAIN
-    user_name: $EMAIL_USER_NAME
-    password: $EMAIL_PASSWORD
+    delivery_method: :smtp
+    smtp_settings:
+      address: $EMAIL_ADDRESS
+      port: $EMAIL_PORT
+      authentication: $EMAIL_AUTHENTICATION
+      domain: $EMAIL_DOMAIN
+      user_name: $EMAIL_USER_NAME
+      password: $EMAIL_PASSWORD
 YML
 		fi
 		
