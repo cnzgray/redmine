@@ -85,14 +85,14 @@ case "$1" in
 			YML
 		fi
 		
-		if [[ -d ${$REDMINE_DATA_DIR}/themes ]]; then
+		if [[ -d $REDMINE_DATA_DIR/themes ]]; then
         echo "Installing themes..."
-        rsync -avq --chown=redmine:redmine ${$REDMINE_DATA_DIR}/themes/ ${REDMINE_HOME}/redmine/public/themes/
+        rsync -avq --chown=redmine:redmine $REDMINE_DATA_DIR/themes/ ${REDMINE_HOME}/redmine/public/themes/
     fi
 		
-		if [[ -d ${$REDMINE_DATA_DIR}/plugins ]]; then
+		if [[ -d $REDMINE_DATA_DIR/plugins ]]; then
         echo "Installing plugins..."
-        rsync -avq --chown=redmine:redmine ${$REDMINE_DATA_DIR}/plugins/ ${REDMINE_HOME}/redmine/plugins/
+        rsync -avq --chown=redmine:redmine $REDMINE_DATA_DIR/plugins/ ${REDMINE_HOME}/redmine/plugins/
     fi
 
 		# ensure the right database adapter is active in the Gemfile.lock
