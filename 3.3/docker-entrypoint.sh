@@ -64,36 +64,35 @@ case "$1" in
 			done
 		fi
 		
-		if [ ! -s config/configuration.yml ]; then
-      cat > './config/configuration.yml' <<-YML
-				$RAILS_ENV:
-          attachments_storage_path: $REDMINE_ATTACHMENTS_DIR
-			YML
-		fi
+		cat > './config/configuration.yml' <<-YML
+			$RAILS_ENV:
+				attachments_storage_path: $REDMINE_ATTACHMENTS_DIR
+		YML
+
 
 		if [ "$EMAIL_ADDRESS" ]; then
 			cat >> './config/configuration.yml' <<-YML
-				  email_delivery:
-				  delivery_method: $EMAIL_METHOD
-				  smtp_settings:
-				    address: $EMAIL_ADDRESS
-				    port: $EMAIL_PORT
-				    authentication: $EMAIL_AUTHENTICATION
-				    domain: $EMAIL_DOMAIN
-				    user_name: $EMAIL_USER_NAME
-				    password: $EMAIL_PASSWORD
+					email_delivery:
+					delivery_method: $EMAIL_METHOD
+					smtp_settings:
+						address: $EMAIL_ADDRESS
+						port: $EMAIL_PORT
+						authentication: $EMAIL_AUTHENTICATION
+						domain: $EMAIL_DOMAIN
+						user_name: $EMAIL_USER_NAME
+						password: $EMAIL_PASSWORD
 			YML
 		fi
 		
 		if [[ -d $REDMINE_DATA_DIR/themes ]]; then
-        echo "Installing themes..."
-        rsync -avq --chown=redmine:redmine $REDMINE_DATA_DIR/themes/ ${REDMINE_HOME}/redmine/public/themes/
-    fi
+				echo "Installing themes..."
+				rsync -avq --chown=redmine:redmine $REDMINE_DATA_DIR/themes/ ${REDMINE_HOME}/redmine/public/themes/
+		fi
 		
 		if [[ -d $REDMINE_DATA_DIR/plugins ]]; then
-        echo "Installing plugins..."
-        rsync -avq --chown=redmine:redmine $REDMINE_DATA_DIR/plugins/ ${REDMINE_HOME}/redmine/plugins/
-    fi
+				echo "Installing plugins..."
+				rsync -avq --chown=redmine:redmine $REDMINE_DATA_DIR/plugins/ ${REDMINE_HOME}/redmine/plugins/
+		fi
 
 		# ensure the right database adapter is active in the Gemfile.lock
 		bundle install --without development test
@@ -102,7 +101,7 @@ case "$1" in
 			if [ "$REDMINE_SECRET_KEY_BASE" ]; then
 				cat > 'config/secrets.yml' <<-YML
 					$RAILS_ENV:
-					  secret_key_base: "$REDMINE_SECRET_KEY_BASE"
+						secret_key_base: "$REDMINE_SECRET_KEY_BASE"
 				YML
 			elif [ ! -f /usr/src/redmine/config/initializers/secret_token.rb ]; then
 				rake generate_secret_token
