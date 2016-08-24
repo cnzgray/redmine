@@ -64,14 +64,14 @@ case "$1" in
 			done
 		fi
 		
-		cat > './config/configuration.yml' <<-YML
+		cat > 'config/configuration.yml' <<-YML
 			$RAILS_ENV:
 				attachments_storage_path: $REDMINE_ATTACHMENTS_DIR
 		YML
 
 
 		if [ "$EMAIL_ADDRESS" ]; then
-			cat >> './config/configuration.yml' <<-YML
+			cat >> 'config/configuration.yml' <<-YML
 					email_delivery:
 					delivery_method: $EMAIL_METHOD
 					smtp_settings:
