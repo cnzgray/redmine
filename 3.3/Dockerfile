@@ -35,6 +35,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		\
 		bzr \
 		git \
+		rsync \
 		mercurial \
 		openssh-client \
 		subversion \
