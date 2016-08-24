@@ -53,6 +53,8 @@ RUN curl -fSL "http://www.redmine.org/releases/redmine-${REDMINE_VERSION}.tar.gz
 	&& mkdir -p tmp/pdf public/plugin_assets \
 	&& chown -R redmine:redmine ./
 
+RUN sed -i "s/问题/任务/g" config/locales/zh.yml
+
 RUN buildDeps='\
 		gcc \
 		libmagickcore-dev \
