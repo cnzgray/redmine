@@ -38,7 +38,7 @@ case "$1" in
 				: "${REDMINE_DB_PORT:=}"
 				: "${REDMINE_DB_USERNAME:=redmine}"
 				: "${REDMINE_DB_PASSWORD:=}"
-				: "${REDMINE_DB_DATABASE:=sqlite/redmine.db}"
+				: "${REDMINE_DB_DATABASE:=$REDMINE_HOME/data/sqlite/redmine.db}"
 				: "${REDMINE_DB_ENCODING:=utf8}"
 
 				mkdir -p "$(dirname "$REDMINE_DB_DATABASE")"
