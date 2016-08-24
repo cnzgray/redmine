@@ -76,7 +76,8 @@ YML
   email_delivery:
     delivery_method: :smtp
     smtp_settings:
-      enable_starttls_auto: $EMAIL_TLS
+      enable_starttls_auto: ${EMAIL_TLS:=false}
+      ssl: ${EMAIL_TLS:=false}
       address: $EMAIL_ADDRESS
       port: $EMAIL_PORT
       authentication: $EMAIL_AUTHENTICATION
